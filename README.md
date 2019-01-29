@@ -23,4 +23,4 @@ There were four major Projects in Term 1 and Term 2
 #### Project 8: Gather the Data froma variety of sources and from different Formats,then Assess its quality and tidiness and clean it .then show by visualizations
 - Project: [Wrangle and Analyze data](https://github.com/Alinazeshan/Data-Analyst-Nanodegree/tree/master/Term%202/8.Twitter%20Data(Wrangle%20and%20Analyze))
 #### Project 9: Learn about Visual Encodings and best practices for building data visualizations
-- Project: [Data Story Telling]()
+- Project: [Data Story Telling](https://github.com/Alinazeshan/Data-Analyst-Nanodegree/tree/master/Term%202/9.Players%20Performance%20in%20Tableau)
