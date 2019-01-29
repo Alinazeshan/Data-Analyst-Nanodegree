@@ -1,0 +1,93 @@
+---
+title: "Explore one variable"
+author: "Dr Alina"
+date: "September 26, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+```
+
+###1. Read the facebook data as *pf*
+
+Read.delim will take the dataset and delimiter is set TAB as default
+
+```{r}
+pf <- read.delim("D:/Courses/Nanodegree/Term 2/EDA and R/lesson3/pseudo_facebook.tsv")
+```
+
+### Histogram of  User's Birthday
+
+ggplot will take three aesthetics, x, y, and color.
+dats is given.
+scale_x_continous will tell to put the label breaks from 1 to 31.
+library(ggthemes) is used to have a different theme just.
+
+```{r}
+ggplot(aes(x = dob_day), data = pf) +
+  geom_histogram(binwidth = 1) +
+  scale_x_continuous(breaks = 1:31)+
+  theme_set(theme_minimal(24)) 
+```
+
+### Faceting
+
+Faceting is used to break a single histogram over a Variable(column),
+ like in this example we are breaking over the month.
+ 
+```{r}
+ggplot(data = pf, aes(x = dob_day)) +
+  geom_histogram(binwidth = 1) +
+  scale_x_continuous(breaks = 1:31) +
+  facet_wrap(~dob_month)
+```
+
+
+### Limiting the Axes (Outliers)
+ 
+A top-coded data set is one for which the value of variables above an upper bound are censored. This is often done to preserve the anonymity of people participating in the survey.
+Scale_x_continous is setting the limit of x from 0 to 1000
+
+```{r}
+ggplot(aes(x = friend_count), data = pf) +
+  geom_histogram() +
+  scale_x_continuous(limits = c(0, 1000))
+```
+
+### Binwidth Adjustment
+Binwidth is given for fine tuning
+moreover, breaks with seq will give start, end and stepping options
+
+```{r}
+ggplot(aes(x = friend_count), data = pf) +
+  geom_histogram(binwidth = 25) +
+  scale_x_continuous(limits = c(0, 1000), breaks = seq(0, 1000, 100))
+```
+
+###Breaking the Histogram by gender
+
+facet_wrap will divide the data by a column and we can specify the number of columns.
+ facet_grid will also do the same and we can specify the vertical and horizontal division like facet_grid(sex~day): it will split the data by sex vertically and day horizontally
+
+```{r}
+ggplot(aes(x = friend_count), data = pf) +
+  geom_histogram() +
+  scale_x_continuous(lim = c(0, 1000), breaks = seq(0, 1000, 500)) +
+  facet_wrap(~gender,ncol = 2)
+```
+
+### Omitting The NA values
+
+We can subset the data by passing !is.na(gender)
+
+```{r}
+ggplot(aes(x = friend_count), data = subset(pf, !is.na(gender))) +
+  geom_histogram() +
+  scale_x_continuous(limits = c(0, 1000), breaks = seq(0, 1000, 50)) +
+  facet_wrap(~gender)
+```
+
+
+
